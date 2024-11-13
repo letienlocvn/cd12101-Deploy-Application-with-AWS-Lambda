@@ -1,12 +1,11 @@
 import * as uuid from 'uuid'
 import { TodosAccess } from '../dataLayer/todoAccess.mjs'
+import { createLogger } from '../utils/logger.mjs'
 
 const todoAccess = new TodosAccess()
 const logger = createLogger('TodosAccess')
 export const createTodo = async (newTodoData, userId) => {
   const s3_env = process.env.TODOS_S3_BUCKET
-  console.log("Env: ", s3_env)
-  const todoId = uuid.v4()
   const { name, dueDate } = newTodoData
   logger.info('Process Create Todo Data is called')
   return await todoAccess.createData({

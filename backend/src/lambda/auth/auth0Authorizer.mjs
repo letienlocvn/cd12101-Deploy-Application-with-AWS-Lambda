@@ -5,7 +5,7 @@ import { createLogger } from '../../utils/logger.mjs'
 
 const logger = createLogger('auth')
 
-const jwksUrl = 'https://dev-letienlocvn.us.auth0.com/.well-known/jwks.json';
+const jwksUrl = 'https://dev-letienlocvn.us.auth0.com/.well-known/jwks.json'
 
 const jwks = new JwksClient({
   jwksUri: jwksUrl
@@ -50,15 +50,16 @@ export async function handler(event) {
 async function verifyToken(authHeader) {
   const token = getToken(authHeader)
   const jwt = jsonwebtoken.decode(token, { complete: true })
-
+  console.log('JWT: ', jwt)
   // Get Signing key
   const signingKey = await jwks.getSigningKey(jwt.header.kid)
   // Verify Token Signature
   const verifiedPayload = jsonwebtoken.verify(
-    token, 
-    signingKey.getPublicKey || signingKey.rsaPublicKey,
+    token,
+    signingKey.publicKey || signingKey.rsaPublicKey,
     { complete: false }
   )
+  console.log("VerifyPayload: ", verifiedPayload)
 
   return verifiedPayload
 }

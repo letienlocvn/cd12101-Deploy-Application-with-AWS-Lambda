@@ -43,9 +43,12 @@ functions:
     events:
       - http:
           method: post
-          # authorizer: Auth
+          authorizer: Auth
           path: todos
           cors: true
+          request:
+            schemas:
+              application/json: ${file(models/create-todo-request.json)}
     iamRoleStatements:
       - Effect: Allow
         Action:
@@ -149,6 +152,7 @@ resources:
                 - DELETE
                 - HEAD
               MaxAge: 7000
+    
     BucketPolicy:
       Type: AWS::S3::BucketPolicy
       Properties:

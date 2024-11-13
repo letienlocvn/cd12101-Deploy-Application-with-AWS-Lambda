@@ -1,5 +1,7 @@
 import { DynamoDB } from '@aws-sdk/client-dynamodb'
 import { DynamoDBDocument } from '@aws-sdk/lib-dynamodb'
+import { createLogger } from '../utils/logger.mjs'
+
 import AWSXRay from 'aws-xray-sdk-core'
 const logger = createLogger('TodosAccess')
 export class TodosAccess {

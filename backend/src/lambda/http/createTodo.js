@@ -12,16 +12,14 @@ export const handler = middy()
   .use(httpErrorHandler())
   .use(cors({ credentials: true }))
   .handler(async (event) => {
-    {
-      logger.info("Creating: ", event)
-      const newTodo = JSON.parse(event.body)
-      const userId = getUserId(event)
-      const newItem = await createTodo(newTodo, userId)
-      return {
-        statusCode: 201,
-        body: JSON.stringify({
-          item: newItem
-        })
-      }
+    logger.info('Creating: ', event)
+    const newTodo = JSON.parse(event.body)
+    const userId = getUserId(event)
+    const newItem = await createTodo(newTodo, userId)
+    return {
+      statusCode: 201,
+      body: JSON.stringify({
+        item: newItem
+      })
     }
   })
