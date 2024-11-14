@@ -7,7 +7,8 @@ const logger = createLogger('TodosAccess')
 export const createTodo = async (newTodoData, userId) => {
   const s3_env = process.env.TODOS_S3_BUCKET
   const { name, dueDate } = newTodoData
-  logger.info('Process Create Todo Data is called')
+  logger.info('Process Create Todo Data is called', process.env.TODOS_S3_BUCKET)
+  const todoId = uuid.v4()
   return await todoAccess.createData({
     todoId,
     name: name,
