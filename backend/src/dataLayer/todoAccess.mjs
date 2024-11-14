@@ -58,6 +58,7 @@ export class TodosAccess {
         ':userId': userId
       }
     })
+    console.log("Called getListOfTodo: ", tableTodos.Items);
     return tableTodos.Items
   }
 }
